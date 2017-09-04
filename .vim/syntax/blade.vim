@@ -1,0 +1,1 @@
+/home/zhangmaolin/src/blade/vim/syntax/blade.vim
