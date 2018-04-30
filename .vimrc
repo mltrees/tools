@@ -175,6 +175,7 @@ set nobackup
 set autowrite
 set ruler                   " 打开状态栏标尺
 set cursorline              " 突出显示当前行
+set cursorcolumn            " 突出显示当前列
 set magic                   " 设置魔术
 set guioptions-=T           " 隐藏工具栏
 set guioptions-=m           " 隐藏菜单栏
@@ -307,6 +308,8 @@ set tags=tags
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "其他东东
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"使得terminal的光标变为细线，而不是默认的粗条。这个在vim的普通模式和插入模式都会生效。
+set gcr=n-v-c:ver25-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor
 "默认打开Taglist 
 let Tlist_Auto_Open=0 
 """""""""""""""""""""""""""""" 
@@ -337,6 +340,8 @@ nnoremap <silent> <F3> :Grep<CR>
 " tab 4 space
 set ts=4
 set expandtab
+set list
+set listchars=tab:>-,trail:-
 " vimdiff tool
 if ! has("gui_running")  
     set t_Co=256  
