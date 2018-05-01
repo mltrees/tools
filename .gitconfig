@@ -1,0 +1,41 @@
+[user]
+     name = zhangmaolin7
+     email = zhangmaolin1@jd.com
+ [alias]
+     co = checkout
+     ca = commit --amend
+     ci = commit
+     st = status
+     br = branch
+     pushdev = push origin dev:dev
+     pushmaster = push origin dev:master
+     fetchdev = fetch origin dev
+     rebasedev = rebase origin dev
+     d = difftool
+     review-ps = push ssh://zhangmaolin7@gerrit.jd.com:443/prediction_service HEAD:refs/for/master
+     review-index = push ssh://zhangmaolin7@gerrit.jd.com:443/rec/searchplatform HEAD:refs/for/master
+     review-merger = push ssh://zhangmaolin7@gerrit.jd.com:443/rec/merger_go HEAD:refs/for/master
+     review-index-builder = push ssh://zhangmaolin7@gerrit.jd.com:443/rec/search_index_builder HEAD:refs/for/master
+     review-psdev = push ssh://zhangmaolin7@gerrit.jd.com:443/prediction_service HEAD:refs/for/staging
+     review-jdsrc = push origin HEAD:zml-dev
+     review-psconf = push ssh://zhangmaolin7@gerrit.jd.com:443/rec/prediction_service_conf HEAD:refs/for/master
+     review-xapian = push ssh://zhangmaolin7@gerrit.jd.com:443/rec/search_xplib HEAD:refs/for/master
+     review-sihub = push ssh://zhangmaolin7@gerrit.jd.com:443/rec-legacy/Mars-rankflow-recommender HEAD:refs/for/master
+    review-bw = push ssh://zhangmaolin7@gerrit.jd.com:443/rec/broadway HEAD:refs/for/master
+    review-serviceapi = push ssh://zhangmaolin7@gerrit.jd.com:443/rec/serviceapi HEAD:refs/for/master
+    review-exconf = push ssh://zhangmaolin7@gerrit.jd.com:443/rec/experiments_config HEAD:refs/for/master
+[diff]
+    tool = vimdiff
+[difftool]
+    prompt = false
+[push]
+    default = matching
+[core]
+    ignorecase = false
+    editor = vim
+[merge]
+    tol = vimdiff
+
+[color]
+    ui = true
+
