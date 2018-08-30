@@ -2,6 +2,8 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 显示相关  
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syntax on
+
 "set shortmess=atI   " 启动的时候不显示那个援助乌干达儿童的提示  
 "winpos 5 5          " 设定窗口位置  
 "set lines=40 columns=155    " 设定窗口大小  
@@ -49,7 +51,7 @@ set fileencoding=utf-8
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""新文件标题""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "新建.c,.h,.sh,.java文件，自动插入文件头 
-autocmd BufNewFile *.cc,*.cpp,*.[ch],*.sh,*.java,*.lua exec ":call SetTitle()" 
+autocmd BufNewFile *.cc,*.cpp,*.[ch],*.sh,*.java,*.lua,*.py exec ":call SetTitle()" 
 ""定义函数SetTitle，自动插入文件头 
 func SetTitle() 
     "如果文件类型为.sh文件 
@@ -57,39 +59,28 @@ func SetTitle()
     if &filetype == 'sh' 
         call setline(1,"\#########################################################################") 
         call append(line("."), "\# File Name: ".expand("%")) 
-        call append(line(".")+1, "\# Author: zml") 
-        call append(line(".")+2, "\# mail: zhangmaolin1@jd..com")
+        call append(line(".")+1, "\# Author: ") 
+        call append(line(".")+2, "\# mail: ")
         call append(line(".")+3, "\# Created Time: ".strftime("%c")) 
         call append(line(".")+4, "\#########################################################################") 
         call append(line(".")+5, "\#!/bin/bash") 
         call append(line(".")+6, "") 
-    elseif &filetype == 'lua'
+    elseif &filetype == 'lua' 
         ""call setline(1,"\#!/usr/bin/lua") 
         call setline(1,"\#!/home/zhangmaolin/src/mars-si-gateway/third_party/lua/src/lua") 
         call append(line("."), "-------------------------------------------------------------------") 
         call append(line(".")+1, "\-- File Name: ".expand("%")) 
-        call append(line(".")+2, "\-- Author: zml") 
-        call append(line(".")+3, "\-- mail: zhangmaolin1@jd..com") 
+        call append(line(".")+2, "\-- Author: ") 
+        call append(line(".")+3, "\-- mail: ") 
         call append(line(".")+4, "\-- Created Time: ".strftime("%c")) 
         call append(line(".")+5, "\-------------------------------------------------------------------------") 
         call append(line(".")+6, "") 
         call append(line(".")+7, "") 
-    elseif &filetype == 'py'
-        call setline(1,"\#!/usr/bin/env python") 
-        call append(line("."), "\# -*- coding: utf-8 -*-") 
-        call append(line(".")+1, "-------------------------------------------------------------------") 
-        call append(line(".")+2, "\-- File Name: ".expand("%")) 
-        call append(line(".")+3, "\-- Author: zml") 
-        call append(line(".")+4, "\-- mail: zhangmaolin1@jd..com") 
-        call append(line(".")+5, "\-- Created Time: ".strftime("%c")) 
-        call append(line(".")+6, "\-------------------------------------------------------------------------") 
-        call append(line(".")+7, "") 
-        call append(line(".")+8, "") 
     else 
         call setline(1, "/*************************************************************************") 
         call append(line("."), "    > File Name: ".expand("%")) 
-        call append(line(".")+1, "    > Author: zml") 
-        call append(line(".")+2, "    > Mail: zhangmaolin1@jd.com ") 
+        call append(line(".")+1, "    > Author: ") 
+        call append(line(".")+2, "    > Mail:  ") 
         call append(line(".")+3, "    > Created Time: ".strftime("%c")) 
         call append(line(".")+4, " ************************************************************************/") 
         call append(line(".")+5, "")
@@ -144,6 +135,8 @@ func! CompileRunGcc()
         exec "!javac %" 
         exec "!java %<"
     elseif &filetype == 'sh'
+        :!./%
+    elseif &filetype == 'py'
         :!./%
     endif
 endfunc
@@ -353,3 +346,8 @@ endif
 augroup filetype
     autocmd! BufRead,BufNewFile BUILD set filetype=blade
 augroup end
+
+""""""""""""""""""""""""""""""""
+" for json printer
+let g:vim_json_syntax_conceal = 0
+" execute pathogen#infect()
