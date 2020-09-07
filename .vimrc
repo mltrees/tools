@@ -3,7 +3,6 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " 显示相关  
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
-
 "set shortmess=atI   " 启动的时候不显示那个援助乌干达儿童的提示  
 "winpos 5 5          " 设定窗口位置  
 "set lines=40 columns=155    " 设定窗口大小  
@@ -34,15 +33,12 @@ endif
 " 设置配色方案
 " colorscheme desert 
 colorscheme molokai
-
 let g:molokai_original = 1
 " let g:rehash256 = 1
 "字体 
 "if (has("gui_running")) 
 "   set guifont=Bitstream\ Vera\ Sans\ Mono\ 10 
 "endif 
- 
-
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
 set encoding=utf-8
@@ -51,7 +47,7 @@ set fileencoding=utf-8
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""新文件标题""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "新建.c,.h,.sh,.java文件，自动插入文件头 
-autocmd BufNewFile *.cc,*.cpp,*.[ch],*.sh,*.java,*.lua,*.py exec ":call SetTitle()" 
+autocmd BufNewFile *.cc,*.cpp,*.[ch],*.sh,*.java,*.lua exec ":call SetTitle()" 
 ""定义函数SetTitle，自动插入文件头 
 func SetTitle() 
     "如果文件类型为.sh文件 
@@ -94,17 +90,14 @@ func SetTitle()
         ""call append(line(".")+6, "#include<stdio.h>")
         call append(line(".")+7, "")
     endif
-
     "新建文件后，自动定位到文件末尾
     autocmd BufNewFile * normal G
 endfunc 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "键盘命令
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 nmap <leader>w :w!<cr>
 nmap <leader>f :find<cr>
-
 " 映射全选+复制 ctrl+a
 map <C-A> ggVGY
 map! <C-A> <Esc>ggVGY
@@ -123,6 +116,8 @@ map <F3> :tabnew .<CR>
 map <C-F3> \be  
 "C，C++ 按F5编译运行
 map <F5> :call CompileRunGcc()<CR>
+" .h and .cpp jump 
+map <C-T> :call CurtineIncSw()<CR>
 func! CompileRunGcc()
     exec "w"
     if &filetype == 'c'
@@ -136,8 +131,8 @@ func! CompileRunGcc()
         exec "!java %<"
     elseif &filetype == 'sh'
         :!./%
-    elseif &filetype == 'py'
-        :!./%
+"    elseif &filetype == 'py'
+"        :!./%
     endif
 endfunc
 "C,C++的调试
@@ -147,6 +142,7 @@ func! Rungdb()
     exec "!g++ % -g -o %<"
     exec "!gdb ./%<"
 endfunc
+nmap <F4> :%!python -m json.tool<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""实用设置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -195,7 +191,7 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 " 不要用空格代替制表符
-set noexpandtab
+" set noexpandtab
 " 在行和段开始处使用制表符
 set smarttab
 " 显示行号
@@ -295,9 +291,8 @@ autocmd FileType java set tags+=D:\tools\java\tags
 "autocmd FileType h,cpp,cc,c set tags+=D:\tools\cpp\tags  
 "let Tlist_Show_One_File=1            "不同时显示多个文件的tag，只显示当前文件的
 "设置tags  
-set tags=tags  
+set tags=$PWD/tags
 "set autochdir 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "其他东东
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -308,14 +303,13 @@ let Tlist_Auto_Open=0
 """""""""""""""""""""""""""""" 
 " Tag list (ctags) 
 """""""""""""""""""""""""""""""" 
-let Tlist_Ctags_Cmd = '/usr/bin/ctags' 
+let Tlist_Ctags_Cmd = '/usr/local/bin/ctags' 
 let Tlist_Show_One_File = 1 "不同时显示多个文件的tag，只显示当前文件的 
 let Tlist_Exit_OnlyWindow = 1 "如果taglist窗口是最后一个窗口，则退出vim 
 let Tlist_Use_Right_Window = 1 "在右侧窗口中显示taglist窗口
 " WinManager
 let g:winManagerWindowLayout='FileExplorer|TagList'
 nmap wm :WMToggle<cr>
-
 set cscopequickfix=s-,c-,d-,i-,t-,e-
 nmap <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-_>g :cs find g <C-R>=expand("<cword>")<CR><CR>
@@ -327,14 +321,14 @@ nmap <C-_>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 nmap <F6> :cn<cr>
 nmap <F7> :cp<cr>
-
 " for grep.vim plug
 nnoremap <silent> <F3> :Grep<CR>
 " tab 4 space
 set ts=4
 set expandtab
 set list
-set listchars=tab:>-,trail:-
+" set listchars=tab:>-,trail:-
+set listchars=tab:>-
 " vimdiff tool
 if ! has("gui_running")  
     set t_Co=256  
@@ -342,12 +336,47 @@ endif
 if &diff  
     colors peaksea  
 endif
-
 augroup filetype
     autocmd! BufRead,BufNewFile BUILD set filetype=blade
 augroup end
-
 """"""""""""""""""""""""""""""""
 " for json printer
 let g:vim_json_syntax_conceal = 0
 " execute pathogen#infect()
+"
+"YouCompleteMe
+" 自动补全配置
+set completeopt=longest,menu	"让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif	"离开插入模式后自动关闭预览窗口
+inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"	"回车即选中当前项
+"上下左右键的行为 会显示其他信息
+inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+"youcompleteme  默认tab  s-tab 和自动补全冲突
+"let g:ycm_key_list_select_completion=['<c-n>']
+let g:ycm_key_list_select_completion = ['<Down>']
+"let g:ycm_key_list_previous_completion=['<c-p>']
+let g:ycm_key_list_previous_completion = ['<Up>']
+let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
+let g:ycm_collect_identifiers_from_tags_files=1	" 开启 YCM 基于标签引擎
+let g:ycm_min_num_of_chars_for_completion=2	" 从第2个键入字符就开始罗列匹配项
+let g:ycm_cache_omnifunc=0	" 禁止缓存匹配项,每次都重新生成匹配项
+let g:ycm_seed_identifiers_with_syntax=1	" 语法关键字补全
+nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>	"force recomile with syntastic
+"nnoremap <leader>lo :lopen<CR>	"open locationlist
+"nnoremap <leader>lc :lclose<CR>	"close locationlist
+inoremap <leader><leader> <C-x><C-o>
+"在注释输入中也能补全
+let g:ycm_complete_in_comments = 1
+"在字符串输入中也能补全
+let g:ycm_complete_in_strings = 1
+"注释和字符串中的文字也会被收入补全
+let g:ycm_collect_identifiers_from_comments_and_strings = 0
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> " 跳转到定义处
+command! JsonFormat :execute '%!python -m json.tool'
+  \ | :execute '%!python -c "import re,sys;chr=__builtins__.__dict__.get(\"unichr\", chr);sys.stdout.write(re.sub(r\"\\u[0-9a-f]{4}\", lambda x: chr(int(\"0x\" + x.group(0)[2:], 16)).encode(\"utf-8\"), sys.stdin.read()))"'
+  \ | :set ft=javascript
+  \ | :1
+"
