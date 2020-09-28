@@ -326,9 +326,9 @@ nnoremap <silent> <F3> :Grep<CR>
 " tab 4 space
 set ts=4
 set expandtab
-set list
+" set list
 " set listchars=tab:>-,trail:-
-set listchars=tab:>-
+" set listchars=tab:>-
 " vimdiff tool
 if ! has("gui_running")  
     set t_Co=256  
