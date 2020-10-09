@@ -22,7 +22,7 @@
     ignorecase = false
     editor = vim
 [merge]
-    tol = vimdiff
+    tool = vimdiff
 
 [color]
     ui = true
