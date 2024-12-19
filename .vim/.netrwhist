@@ -1,6 +1,12 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/var/spool/cron'
-let g:netrw_dirhist_2='crontabs'
-let g:netrw_dirhist_3='/var/spool/cron/crontabs'
-let g:netrw_dirhist_4='/home/zhangmaolin/project/playgroud'
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/Users/zhangmaolin/src/jd.com/rec_data_config/src/main/resource/jimdb_resource/jimdb_config/sq/search_main_longtime'
+let g:netrw_dirhist_2='/Users/zhangmaolin/src/jd.com/rec_data_config/src/main/data/2399'
+let g:netrw_dirhist_1='/Users/zhangmaolin/src/jd.com/rec_data_config/src/main/resource/jimdb_resource/jimdb_config/ht/search_2000_item_longtime'
+let g:netrw_dirhist_0='/Users/zhangmaolin/src/jd.com/rec_data_config/src/main/resource/jimdb_resource/jimdb_config/lf/search_2000_item_longtime'
+let g:netrw_dirhist_9='/Users/zhangmaolin/src/jd.com/rec_data_config/src/main/data/34800001'
+let g:netrw_dirhist_8='/Users/zhangmaolin/src/jd.com/model_routing/dl_exp_routing'
+let g:netrw_dirhist_7='/Users/zhangmaolin/src/jd.com/rec_data_config/src/main/resource/jimdb_resource/jimdb_config/lf/search_2000_item'
+let g:netrw_dirhist_6='/Users/zhangmaolin/src/jd.com/aiflow/model_predictor_server/.git'
+let g:netrw_dirhist_5='/Users/zhangmaolin/src/jd.com/aiflow/model_predictor_server'
+let g:netrw_dirhist_4='/Users/zhangmaolin/src/gitee.com/machine_learning_d2l/d2lv2'
